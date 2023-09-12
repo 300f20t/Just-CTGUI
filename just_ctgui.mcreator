@@ -319,7 +319,7 @@
       "name": "Scriptswriter",
       "type": "procedure",
       "sortid": 13,
-      "compiles": false,
+      "compiles": true,
       "locked_code": true,
       "registry_name": "scriptswriter",
       "metadata": {
@@ -676,7 +676,7 @@
   "workspaceSettings": {
     "modid": "just_ctgui",
     "modName": "Just CTGUI",
-    "version": "0.0.3_beta_build_3",
+    "version": "0.0.4_beta_build_4",
     "author": "300f20t, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "MIT License",
@@ -691,5 +691,5 @@
     "modElementsPackage": "net.mcreator.justctgui",
     "lockBaseModFiles": false
   },
-  "mcreatorVersion": 202300333711
+  "mcreatorVersion": 202300336712
 }
