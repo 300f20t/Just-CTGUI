@@ -57,8 +57,8 @@
       "registry_name": "craftingtable_ctgui",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/justctgui/network/CraftingtableCTGUIButtonMessage.java",
           "src/main/java/net/mcreator/justctgui/world/inventory/CraftingtableCTGUIMenu.java",
+          "src/main/java/net/mcreator/justctgui/network/CraftingtableCTGUIButtonMessage.java",
           "src/main/java/net/mcreator/justctgui/network/CraftingtableCTGUISlotMessage.java",
           "src/main/java/net/mcreator/justctgui/client/gui/CraftingtableCTGUIScreen.java"
         ]
@@ -465,10 +465,10 @@
       "registry_name": "furnace_gui",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/justctgui/world/inventory/FurnaceGUIMenu.java",
           "src/main/java/net/mcreator/justctgui/network/FurnaceGUISlotMessage.java",
+          "src/main/java/net/mcreator/justctgui/client/gui/FurnaceGUIScreen.java",
           "src/main/java/net/mcreator/justctgui/network/FurnaceGUIButtonMessage.java",
-          "src/main/java/net/mcreator/justctgui/client/gui/FurnaceGUIScreen.java"
+          "src/main/java/net/mcreator/justctgui/world/inventory/FurnaceGUIMenu.java"
         ]
       },
       "path": "~/GUIs"
@@ -785,7 +785,7 @@
   "workspaceSettings": {
     "modid": "just_ctgui",
     "modName": "Just CTGUI",
-    "version": "0.0.7_release",
+    "version": "0.0.9_alpha",
     "author": "300f20t, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "MIT License",
@@ -794,9 +794,7 @@
     "requiredMods": [],
     "dependencies": [],
     "dependants": [],
-    "mcreatorDependencies": [
-      "craft_tweaker"
-    ],
+    "mcreatorDependencies": [],
     "currentGenerator": "fabric-1.20.1",
     "credits": "Created using mod maker MCreator - https://mcreator.net/about",
     "modElementsPackage": "net.mcreator.justctgui",
