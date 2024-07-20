@@ -1,5 +1,5 @@
 {
-  "_fv": 60,
+  "_fv": 57,
   "_type": "gui",
   "definition": {
     "type": 1,
@@ -21,8 +21,8 @@
           },
           "width": 40,
           "height": 20,
-          "x": 2,
-          "y": 12
+          "x": 6,
+          "y": 8
         }
       },
       {
@@ -36,8 +36,8 @@
           },
           "width": 67,
           "height": 20,
-          "x": 165,
-          "y": 12
+          "x": 240,
+          "y": 8
         }
       },
       {
@@ -51,8 +51,8 @@
           },
           "width": 77,
           "height": 20,
-          "x": 88,
-          "y": 12
+          "x": 141,
+          "y": 8
         }
       },
       {
@@ -66,8 +66,8 @@
           },
           "width": 46,
           "height": 20,
-          "x": 42,
-          "y": 12
+          "x": 69,
+          "y": 8
         }
       },
       {
@@ -81,8 +81,8 @@
           },
           "width": 67,
           "height": 20,
-          "x": 232,
-          "y": 12
+          "x": 330,
+          "y": 8
         }
       },
       {
@@ -92,7 +92,7 @@
           "name": "recipe_name",
           "width": 120,
           "height": 20,
-          "x": -3,
+          "x": 2,
           "y": 44
         }
       },
@@ -103,7 +103,7 @@
           "name": "file_name",
           "width": 120,
           "height": 20,
-          "x": -3,
+          "x": 2,
           "y": 80
         }
       },
@@ -118,8 +118,8 @@
             "value": -3355393,
             "falpha": 0.0
           },
-          "x": -3,
-          "y": 35
+          "x": 2,
+          "y": 34
         }
       },
       {
@@ -133,8 +133,8 @@
             "value": -3355393,
             "falpha": 0.0
           },
-          "x": -3,
-          "y": 71
+          "x": 2,
+          "y": 70
         }
       },
       {
@@ -159,7 +159,7 @@
           "text": "Save",
           "isUndecorated": false,
           "onClick": {
-            "name": "Scriptswriter"
+            "name": "ScriptsWriter"
           },
           "width": 46,
           "height": 20,
@@ -179,7 +179,7 @@
           "width": 51,
           "height": 20,
           "x": 312,
-          "y": 179
+          "y": 98
         }
       },
       {
@@ -413,8 +413,8 @@
           },
           "width": 24,
           "height": 24,
-          "x": 380,
-          "y": 42
+          "x": 4,
+          "y": 166
         }
       },
       {
@@ -425,8 +425,8 @@
           "displayCondition": {
             "name": "ATTENTION"
           },
-          "x": 384,
-          "y": 46
+          "x": 8,
+          "y": 170
         }
       },
       {
@@ -455,78 +455,17 @@
             "fixedValue": "Mirror axis:"
           },
           "color": {
-            "value": -3355393,
+            "value": -4610825,
             "falpha": 0.0
           },
-          "x": 2,
-          "y": 2
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_current_axis",
-          "text": {
-            "fixedValue": "Current axis:"
-          },
-          "color": {
-            "value": -3355393,
-            "falpha": 0.0
-          },
-          "x": 126,
-          "y": 2
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_axis",
-          "text": {
-            "fixedValue": "axis",
-            "name": "GetCurrentAxis"
-          },
-          "color": {
-            "value": -3355393,
-            "falpha": 0.0
-          },
-          "x": 194,
-          "y": 2
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_reload",
-          "text": "Reload",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "ReloadCommand"
-          },
-          "width": 56,
-          "height": 20,
-          "x": 312,
-          "y": 98
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_crafting",
-          "text": {
-            "fixedValue": "Crafting"
-          },
-          "color": {
-            "value": -12829636,
-            "falpha": 0.0
-          },
-          "x": 150,
-          "y": 42
+          "x": 6,
+          "y": -2
         }
       }
     ],
     "gridSettings": {
-      "sx": 18,
-      "sy": 18,
+      "sx": 4,
+      "sy": 4,
       "ox": 11,
       "oy": 15,
       "snapOnGrid": true

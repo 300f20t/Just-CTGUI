@@ -1,25 +1,28 @@
+
 /*
  *	MCreator note: This file will be REGENERATED on each build.
  */
 package net.mcreator.justctgui.init;
 
-import net.minecraftforge.registries.RegistryObject;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.common.extensions.IForgeMenuType;
-
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
 
-import net.mcreator.justctgui.world.inventory.FurnaceRemovingCTGUIMenu;
-import net.mcreator.justctgui.world.inventory.FurnaceCTGUIMenu;
+import net.mcreator.justctgui.world.inventory.FurnaceGUIMenu;
 import net.mcreator.justctgui.world.inventory.CraftingtableCTGUIMenu;
-import net.mcreator.justctgui.world.inventory.CraftingTableRemovingCTGUIMenu;
 import net.mcreator.justctgui.JustCtguiMod;
 
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+
 public class JustCtguiModMenus {
-	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.MENU_TYPES, JustCtguiMod.MODID);
-	public static final RegistryObject<MenuType<CraftingtableCTGUIMenu>> CRAFTINGTABLE_CTGUI = REGISTRY.register("craftingtable_ctgui", () -> IForgeMenuType.create(CraftingtableCTGUIMenu::new));
-	public static final RegistryObject<MenuType<FurnaceCTGUIMenu>> FURNACE_CTGUI = REGISTRY.register("furnace_ctgui", () -> IForgeMenuType.create(FurnaceCTGUIMenu::new));
-	public static final RegistryObject<MenuType<CraftingTableRemovingCTGUIMenu>> CRAFTING_TABLE_REMOVING_CTGUI = REGISTRY.register("crafting_table_removing_ctgui", () -> IForgeMenuType.create(CraftingTableRemovingCTGUIMenu::new));
-	public static final RegistryObject<MenuType<FurnaceRemovingCTGUIMenu>> FURNACE_REMOVING_CTGUI = REGISTRY.register("furnace_removing_ctgui", () -> IForgeMenuType.create(FurnaceRemovingCTGUIMenu::new));
+	public static MenuType<FurnaceGUIMenu> FURNACE_GUI;
+	public static MenuType<CraftingtableCTGUIMenu> CRAFTINGTABLE_CTGUI;
+
+	public static void load() {
+		FURNACE_GUI = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(JustCtguiMod.MODID, "furnace_gui"), new ExtendedScreenHandlerType<>(FurnaceGUIMenu::new));
+		FurnaceGUIMenu.screenInit();
+		CRAFTINGTABLE_CTGUI = Registry.register(BuiltInRegistries.MENU, new ResourceLocation(JustCtguiMod.MODID, "craftingtable_ctgui"), new ExtendedScreenHandlerType<>(CraftingtableCTGUIMenu::new));
+		CraftingtableCTGUIMenu.screenInit();
+	}
 }

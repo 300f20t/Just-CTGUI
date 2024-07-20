@@ -1,0 +1,51 @@
+
+package net.mcreator.justctgui.network;
+
+import net.minecraft.world.level.Level;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.network.FriendlyByteBuf;
+
+import net.mcreator.justctgui.world.inventory.FurnaceGUIMenu;
+import net.mcreator.justctgui.procedures.GettingItemIn1SlotOfFurnaceGUIProcedure;
+import net.mcreator.justctgui.procedures.GettingItemIn0SlotOfFurnaceGUIProcedure;
+
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+
+import java.util.HashMap;
+
+import io.netty.buffer.Unpooled;
+
+public class FurnaceGUISlotMessage extends FriendlyByteBuf {
+	public FurnaceGUISlotMessage(int slot, int x, int y, int z, int changeType, int meta) {
+		super(Unpooled.buffer());
+		writeInt(slot);
+		writeInt(x);
+		writeInt(y);
+		writeInt(z);
+		writeInt(changeType);
+		writeInt(meta);
+	}
+
+	public static void apply(MinecraftServer server, ServerPlayer entity, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
+		int slot = buf.readInt();
+		double x = buf.readInt();
+		double y = buf.readInt();
+		double z = buf.readInt();
+		int changeType = buf.readInt();
+		int meta = buf.readInt();
+		server.execute(() -> {
+			Level world = entity.level();
+			HashMap guistate = FurnaceGUIMenu.guistate;
+			if (slot == 0 && changeType == 0) {
+
+				GettingItemIn0SlotOfFurnaceGUIProcedure.execute(world, entity);
+			}
+			if (slot == 1 && changeType == 0) {
+
+				GettingItemIn1SlotOfFurnaceGUIProcedure.execute(world, entity);
+			}
+		});
+	}
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "just_ctgui",
-  "version": "0.0.1_alpha_build_1",
+  "version": "0.0.7_release",
   "name": "Just CTGUI",
   "authors": [
     "300f20t, MCreator"
@@ -11,6 +11,7 @@
     "sources": ""
   },
   "license": "MIT License",
+  "accessWidener": "just_ctgui.accesswidener",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -21,9 +22,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14.9",
+    "fabricloader": ">=0.14.21",
     "fabric": "*",
-    "minecraft": "~1.18",
+    "minecraft": "~1.20",
     "java": ">=17"
   }
 }

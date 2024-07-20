@@ -1,12 +1,7 @@
 package net.mcreator.justctgui.network;
 
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class JustCtguiModVariables {
-	public static String item_in_slot_0_crafting_table = "";
+	public static String item_in_slot_0_crafting_table = "\"\"";
 	public static String item_in_slot_1_crafting_table = "\"\"";
 	public static String item_in_slot_2_crafting_table = "\"\"";
 	public static String item_in_slot_3_crafting_table = "\"\"";
@@ -18,12 +13,11 @@ public class JustCtguiModVariables {
 	public static String item_in_slot_9_crafting_table = "\"\"";
 	public static String Generated_recipe = "\"\"";
 	public static String Recipe_name = "\"\"";
+	public static double generated_count = 0.0;
 	public static String Pre_generated_recipe = "\"\"";
 	public static boolean Is_mirrored = false;
 	public static boolean Is_shapeless = false;
 	public static String Mirror_axis = "\"NONE\"";
-
-	@SubscribeEvent
-	public static void init(FMLCommonSetupEvent event) {
-	}
+	public static String item_in_0_slot_of_furnace = "\"\"";
+	public static String item_in_1_slot_of_furnace = "\"\"";
 }

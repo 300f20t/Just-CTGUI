@@ -1,26 +1,32 @@
 package net.mcreator.justctgui.procedures;
 
-import net.minecraftforge.registries.ForgeRegistries;
-
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import net.mcreator.justctgui.network.JustCtguiModVariables;
-import net.mcreator.justctgui.JustCtguiMod;
 
-import java.util.function.Supplier;
-import java.util.Map;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 
 public class Iteminslot7incraftingtableCTGUIProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		JustCtguiMod.queueServerWork(1, () -> {
-			JustCtguiModVariables.item_in_slot_7_crafting_table = "<item:" + (ForgeRegistries.ITEMS
-					.getKey((entity instanceof Player _plrSlotItem && _plrSlotItem.containerMenu instanceof Supplier _splr && _splr.get() instanceof Map _slt ? ((Slot) _slt.get(7)).getItem() : ItemStack.EMPTY).getItem()).toString()) + ">";
-		});
+		new Object() {
+			private int ticks = 0;
+
+			public void startDelay(LevelAccessor world) {
+				ServerTickEvents.END_SERVER_TICK.register((server) -> {
+					this.ticks++;
+					if (this.ticks == 1) {
+						JustCtguiModVariables.item_in_slot_7_crafting_table = "<item:"
+								+ (BuiltInRegistries.ITEM.getKey((entity instanceof ServerPlayer _plrSlotItem ? _plrSlotItem.containerMenu.getSlot(7).getItem() : ItemStack.EMPTY).getItem()).toString()) + ">";
+						return;
+					}
+				});
+			}
+		}.startDelay(world);
 	}
 }

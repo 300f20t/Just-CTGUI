@@ -1,115 +1,77 @@
 
 package net.mcreator.justctgui.network;
 
-import net.minecraftforge.network.NetworkEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.core.BlockPos;
 
 import net.mcreator.justctgui.world.inventory.CraftingtableCTGUIMenu;
 import net.mcreator.justctgui.procedures.VerticalmirroraxisProcedure;
-import net.mcreator.justctgui.procedures.ScriptswriterProcedure;
-import net.mcreator.justctgui.procedures.ReloadCommandProcedure;
+import net.mcreator.justctgui.procedures.ScriptsWriterProcedure;
 import net.mcreator.justctgui.procedures.NonemirroraxisProcedure;
 import net.mcreator.justctgui.procedures.HorizontalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.GenerateracipesProcedure;
 import net.mcreator.justctgui.procedures.GUIcloseProcedure;
 import net.mcreator.justctgui.procedures.DiagonalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.AllmirroraxisProcedure;
-import net.mcreator.justctgui.JustCtguiMod;
 
-import java.util.function.Supplier;
+import net.fabricmc.fabric.api.networking.v1.PacketSender;
+
 import java.util.HashMap;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class CraftingtableCTGUIButtonMessage {
-	private final int buttonID, x, y, z;
+import io.netty.buffer.Unpooled;
 
-	public CraftingtableCTGUIButtonMessage(FriendlyByteBuf buffer) {
-		this.buttonID = buffer.readInt();
-		this.x = buffer.readInt();
-		this.y = buffer.readInt();
-		this.z = buffer.readInt();
-	}
-
+public class CraftingtableCTGUIButtonMessage extends FriendlyByteBuf {
 	public CraftingtableCTGUIButtonMessage(int buttonID, int x, int y, int z) {
-		this.buttonID = buttonID;
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		super(Unpooled.buffer());
+		writeInt(buttonID);
+		writeInt(x);
+		writeInt(y);
+		writeInt(z);
 	}
 
-	public static void buffer(CraftingtableCTGUIButtonMessage message, FriendlyByteBuf buffer) {
-		buffer.writeInt(message.buttonID);
-		buffer.writeInt(message.x);
-		buffer.writeInt(message.y);
-		buffer.writeInt(message.z);
-	}
+	public static void apply(MinecraftServer server, ServerPlayer entity, ServerGamePacketListenerImpl handler, FriendlyByteBuf buf, PacketSender responseSender) {
+		int buttonID = buf.readInt();
+		double x = buf.readInt();
+		double y = buf.readInt();
+		double z = buf.readInt();
+		server.execute(() -> {
+			Level world = entity.level();
+			HashMap guistate = CraftingtableCTGUIMenu.guistate;
+			if (buttonID == 0) {
 
-	public static void handler(CraftingtableCTGUIButtonMessage message, Supplier<NetworkEvent.Context> contextSupplier) {
-		NetworkEvent.Context context = contextSupplier.get();
-		context.enqueueWork(() -> {
-			Player entity = context.getSender();
-			int buttonID = message.buttonID;
-			int x = message.x;
-			int y = message.y;
-			int z = message.z;
-			handleButtonAction(entity, buttonID, x, y, z);
+				AllmirroraxisProcedure.execute();
+			}
+			if (buttonID == 1) {
+
+				DiagonalmirroraxisProcedure.execute();
+			}
+			if (buttonID == 2) {
+
+				HorizontalmirroraxisProcedure.execute();
+			}
+			if (buttonID == 3) {
+
+				NonemirroraxisProcedure.execute();
+			}
+			if (buttonID == 4) {
+
+				VerticalmirroraxisProcedure.execute();
+			}
+			if (buttonID == 5) {
+
+				GenerateracipesProcedure.execute(entity, guistate);
+			}
+			if (buttonID == 6) {
+
+				ScriptsWriterProcedure.execute();
+			}
+			if (buttonID == 7) {
+
+				GUIcloseProcedure.execute(entity);
+			}
 		});
-		context.setPacketHandled(true);
-	}
-
-	public static void handleButtonAction(Player entity, int buttonID, int x, int y, int z) {
-		Level world = entity.level;
-		HashMap guistate = CraftingtableCTGUIMenu.guistate;
-		// security measure to prevent arbitrary chunk generation
-		if (!world.hasChunkAt(new BlockPos(x, y, z)))
-			return;
-		if (buttonID == 0) {
-
-			AllmirroraxisProcedure.execute();
-		}
-		if (buttonID == 1) {
-
-			DiagonalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 2) {
-
-			HorizontalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 3) {
-
-			NonemirroraxisProcedure.execute();
-		}
-		if (buttonID == 4) {
-
-			VerticalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 5) {
-
-			GenerateracipesProcedure.execute(world, guistate);
-		}
-		if (buttonID == 6) {
-
-			ScriptswriterProcedure.execute(entity, guistate);
-		}
-		if (buttonID == 7) {
-
-			GUIcloseProcedure.execute(entity);
-		}
-		if (buttonID == 8) {
-
-			ReloadCommandProcedure.execute(world, x, y, z);
-		}
-	}
-
-	@SubscribeEvent
-	public static void registerMessage(FMLCommonSetupEvent event) {
-		JustCtguiMod.addNetworkMessage(CraftingtableCTGUIButtonMessage.class, CraftingtableCTGUIButtonMessage::buffer, CraftingtableCTGUIButtonMessage::new, CraftingtableCTGUIButtonMessage::handler);
 	}
 }
