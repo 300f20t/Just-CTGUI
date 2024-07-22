@@ -1,11 +1,11 @@
 package net.mcreator.justctgui.client.gui;
 
 import net.minecraft.world.World;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -17,7 +17,8 @@ import net.mcreator.justctgui.JustCtguiMod;
 
 import java.util.HashMap;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.matrix.MatrixStack;
 
 public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 	private final static HashMap<String, Object> guistate = FurnaceCTGUIMenu.guistate;
@@ -47,28 +48,28 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 	private static final ResourceLocation texture = new ResourceLocation("just_ctgui:textures/screens/furnace_ctgui.png");
 
 	@Override
-	public void render(int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground();
-		super.render(mouseX, mouseY, partialTicks);
-		recipe_name.render(mouseX, mouseY, partialTicks);
-		file_name.render(mouseX, mouseY, partialTicks);
-		XP.render(mouseX, mouseY, partialTicks);
-		time.render(mouseX, mouseY, partialTicks);
-		this.renderHoveredToolTip(mouseX, mouseY);
+	public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(ms);
+		super.render(ms, mouseX, mouseY, partialTicks);
+		recipe_name.render(ms, mouseX, mouseY, partialTicks);
+		file_name.render(ms, mouseX, mouseY, partialTicks);
+		XP.render(ms, mouseX, mouseY, partialTicks);
+		time.render(ms, mouseX, mouseY, partialTicks);
+		this.renderHoveredTooltip(ms, mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int gx, int gy) {
-		GlStateManager.color4f(1, 1, 1, 1);
-		GlStateManager.enableBlend();
-		GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+	protected void drawGuiContainerBackgroundLayer(MatrixStack ms, float partialTicks, int gx, int gy) {
+		RenderSystem.color4f(1, 1, 1, 1);
+		RenderSystem.enableBlend();
+		RenderSystem.defaultBlendFunc();
 		Minecraft.getInstance().getTextureManager().bindTexture(texture);
-		this.blit(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
+		this.blit(ms, this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize, this.xSize, this.ySize);
 
 		Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation("just_ctgui:textures/screens/crafting_table.png"));
-		this.blit(this.guiLeft + 78, this.guiTop + 34, 0, 0, 24, 17, 24, 17);
+		this.blit(ms, this.guiLeft + 78, this.guiTop + 34, 0, 0, 24, 17, 24, 17);
 
-		GlStateManager.disableBlend();
+		RenderSystem.disableBlend();
 	}
 
 	@Override
@@ -98,23 +99,23 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-		this.font.drawString(I18n.format("gui.just_ctgui.furnace_ctgui.label_recipe_name"), -129, -2, -3355393);
-		this.font.drawString(I18n.format("gui.just_ctgui.furnace_ctgui.label_file_name"), -129, 34, -3355393);
-		this.font.drawString(I18n.format("gui.just_ctgui.furnace_ctgui.label_xp"), -129, 88, -3355393);
-		this.font.drawString(I18n.format("gui.just_ctgui.furnace_ctgui.label_time"), -129, 133, -3355393);
-		this.font.drawString(I18n.format("gui.just_ctgui.furnace_ctgui.label_furnace"), 69, 7, -12829636);
+	protected void drawGuiContainerForegroundLayer(MatrixStack poseStack, int mouseX, int mouseY) {
+		this.font.drawString(poseStack, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.label_recipe_name").getString(), -129, -2, -3355393);
+		this.font.drawString(poseStack, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.label_file_name").getString(), -129, 34, -3355393);
+		this.font.drawString(poseStack, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.label_xp").getString(), -129, 88, -3355393);
+		this.font.drawString(poseStack, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.label_time").getString(), -129, 133, -3355393);
+		this.font.drawString(poseStack, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.label_furnace").getString(), 69, 7, -12829636);
 	}
 
 	@Override
 	public void init(Minecraft minecraft, int width, int height) {
 		super.init(minecraft, width, height);
-		recipe_name = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 8, 118, 18, I18n.format("gui.just_ctgui.furnace_ctgui.recipe_name")) {
+		recipe_name = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 8, 118, 18, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.recipe_name")) {
 			@Override
 			public void writeText(String text) {
 				super.writeText(text);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.recipe_name"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.recipe_name").getString());
 				else
 					setSuggestion(null);
 			}
@@ -123,21 +124,21 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 			public void setCursorPosition(int pos) {
 				super.setCursorPosition(pos);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.recipe_name"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.recipe_name").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		recipe_name.setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.recipe_name"));
+		recipe_name.setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.recipe_name").getString());
 		recipe_name.setMaxStringLength(32767);
 		guistate.put("text:recipe_name", recipe_name);
 		this.children.add(this.recipe_name);
-		file_name = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 44, 118, 18, I18n.format("gui.just_ctgui.furnace_ctgui.file_name")) {
+		file_name = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 44, 118, 18, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.file_name")) {
 			@Override
 			public void writeText(String text) {
 				super.writeText(text);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.file_name"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.file_name").getString());
 				else
 					setSuggestion(null);
 			}
@@ -146,21 +147,21 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 			public void setCursorPosition(int pos) {
 				super.setCursorPosition(pos);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.file_name"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.file_name").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		file_name.setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.file_name"));
+		file_name.setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.file_name").getString());
 		file_name.setMaxStringLength(32767);
 		guistate.put("text:file_name", file_name);
 		this.children.add(this.file_name);
-		XP = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 98, 118, 18, I18n.format("gui.just_ctgui.furnace_ctgui.XP")) {
+		XP = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 98, 118, 18, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.XP")) {
 			@Override
 			public void writeText(String text) {
 				super.writeText(text);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.XP"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.XP").getString());
 				else
 					setSuggestion(null);
 			}
@@ -169,21 +170,21 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 			public void setCursorPosition(int pos) {
 				super.setCursorPosition(pos);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.XP"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.XP").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		XP.setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.XP"));
+		XP.setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.XP").getString());
 		XP.setMaxStringLength(32767);
 		guistate.put("text:XP", XP);
 		this.children.add(this.XP);
-		time = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 143, 118, 18, I18n.format("gui.just_ctgui.furnace_ctgui.time")) {
+		time = new TextFieldWidget(this.font, this.guiLeft + -128, this.guiTop + 143, 118, 18, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.time")) {
 			@Override
 			public void writeText(String text) {
 				super.writeText(text);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.time"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.time").getString());
 				else
 					setSuggestion(null);
 			}
@@ -192,16 +193,16 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 			public void setCursorPosition(int pos) {
 				super.setCursorPosition(pos);
 				if (getText().isEmpty())
-					setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.time"));
+					setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.time").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		time.setSuggestion(I18n.format("gui.just_ctgui.furnace_ctgui.time"));
+		time.setSuggestion(new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.time").getString());
 		time.setMaxStringLength(32767);
 		guistate.put("text:time", time);
 		this.children.add(this.time);
-		button_generate = new Button(this.guiLeft + 186, this.guiTop + 7, 67, 20, I18n.format("gui.just_ctgui.furnace_ctgui.button_generate"), e -> {
+		button_generate = new Button(this.guiLeft + 186, this.guiTop + 7, 67, 20, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.button_generate"), e -> {
 			if (true) {
 				JustCtguiMod.PACKET_HANDLER.sendToServer(new FurnaceCTGUIButtonMessage(0, x, y, z));
 				FurnaceCTGUIButtonMessage.handleButtonAction(entity, 0, x, y, z);
@@ -209,7 +210,7 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 		});
 		guistate.put("button:button_generate", button_generate);
 		this.addButton(button_generate);
-		button_save = new Button(this.guiLeft + 186, this.guiTop + 34, 46, 20, I18n.format("gui.just_ctgui.furnace_ctgui.button_save"), e -> {
+		button_save = new Button(this.guiLeft + 186, this.guiTop + 34, 46, 20, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.button_save"), e -> {
 			if (true) {
 				JustCtguiMod.PACKET_HANDLER.sendToServer(new FurnaceCTGUIButtonMessage(1, x, y, z));
 				FurnaceCTGUIButtonMessage.handleButtonAction(entity, 1, x, y, z);
@@ -217,7 +218,7 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 		});
 		guistate.put("button:button_save", button_save);
 		this.addButton(button_save);
-		button_close = new Button(this.guiLeft + 186, this.guiTop + 142, 51, 20, I18n.format("gui.just_ctgui.furnace_ctgui.button_close"), e -> {
+		button_close = new Button(this.guiLeft + 186, this.guiTop + 142, 51, 20, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.button_close"), e -> {
 			if (true) {
 				JustCtguiMod.PACKET_HANDLER.sendToServer(new FurnaceCTGUIButtonMessage(2, x, y, z));
 				FurnaceCTGUIButtonMessage.handleButtonAction(entity, 2, x, y, z);
@@ -225,7 +226,7 @@ public class FurnaceCTGUIScreen extends ContainerScreen<FurnaceCTGUIMenu> {
 		});
 		guistate.put("button:button_close", button_close);
 		this.addButton(button_close);
-		button_reload = new Button(this.guiLeft + 186, this.guiTop + 61, 56, 20, I18n.format("gui.just_ctgui.furnace_ctgui.button_reload"), e -> {
+		button_reload = new Button(this.guiLeft + 186, this.guiTop + 61, 56, 20, new TranslationTextComponent("gui.just_ctgui.furnace_ctgui.button_reload"), e -> {
 			if (true) {
 				JustCtguiMod.PACKET_HANDLER.sendToServer(new FurnaceCTGUIButtonMessage(3, x, y, z));
 				FurnaceCTGUIButtonMessage.handleButtonAction(entity, 3, x, y, z);

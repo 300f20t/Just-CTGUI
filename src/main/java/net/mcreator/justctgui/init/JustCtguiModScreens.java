@@ -1,5 +1,5 @@
 /*
- *    MCreator note: This file will be REGENERATED on each build.
+ *	MCreator note: This file will be REGENERATED on each build.
  */
 package net.mcreator.justctgui.init;
 
@@ -19,9 +19,11 @@ import net.mcreator.justctgui.client.gui.CraftingTableRemovingCTGUIScreen;
 public class JustCtguiModScreens {
 	@SubscribeEvent
 	public static void clientLoad(FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(JustCtguiModMenus.CRAFTINGTABLE_CTGUI.get(), CraftingtableCTGUIScreen::new);
-		ScreenManager.registerFactory(JustCtguiModMenus.FURNACE_CTGUI.get(), FurnaceCTGUIScreen::new);
-		ScreenManager.registerFactory(JustCtguiModMenus.CRAFTING_TABLE_REMOVING_CTGUI.get(), CraftingTableRemovingCTGUIScreen::new);
-		ScreenManager.registerFactory(JustCtguiModMenus.FURNACE_REMOVING_CTGUI.get(), FurnaceRemovingCTGUIScreen::new);
+		event.enqueueWork(() -> {
+			ScreenManager.registerFactory(JustCtguiModMenus.CRAFTINGTABLE_CTGUI.get(), CraftingtableCTGUIScreen::new);
+			ScreenManager.registerFactory(JustCtguiModMenus.FURNACE_CTGUI.get(), FurnaceCTGUIScreen::new);
+			ScreenManager.registerFactory(JustCtguiModMenus.CRAFTING_TABLE_REMOVING_CTGUI.get(), CraftingTableRemovingCTGUIScreen::new);
+			ScreenManager.registerFactory(JustCtguiModMenus.FURNACE_REMOVING_CTGUI.get(), FurnaceRemovingCTGUIScreen::new);
+		});
 	}
 }

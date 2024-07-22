@@ -84,7 +84,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(0, 0, 0);
+				slotChanged(0, 0, 0);
 			}
 		}));
 		this.customSlots.put(1, this.addSlot(new SlotItemHandler(internal, 1, 43, 17) {
@@ -93,7 +93,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(1, 0, 0);
+				slotChanged(1, 0, 0);
 			}
 		}));
 		this.customSlots.put(2, this.addSlot(new SlotItemHandler(internal, 2, 61, 17) {
@@ -102,7 +102,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(2, 0, 0);
+				slotChanged(2, 0, 0);
 			}
 		}));
 		this.customSlots.put(3, this.addSlot(new SlotItemHandler(internal, 3, 25, 35) {
@@ -111,7 +111,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(3, 0, 0);
+				slotChanged(3, 0, 0);
 			}
 		}));
 		this.customSlots.put(4, this.addSlot(new SlotItemHandler(internal, 4, 43, 35) {
@@ -120,7 +120,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(4, 0, 0);
+				slotChanged(4, 0, 0);
 			}
 		}));
 		this.customSlots.put(5, this.addSlot(new SlotItemHandler(internal, 5, 61, 35) {
@@ -129,7 +129,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(5, 0, 0);
+				slotChanged(5, 0, 0);
 			}
 		}));
 		this.customSlots.put(6, this.addSlot(new SlotItemHandler(internal, 6, 25, 53) {
@@ -138,7 +138,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(6, 0, 0);
+				slotChanged(6, 0, 0);
 			}
 		}));
 		this.customSlots.put(7, this.addSlot(new SlotItemHandler(internal, 7, 43, 53) {
@@ -147,7 +147,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(7, 0, 0);
+				slotChanged(7, 0, 0);
 			}
 		}));
 		this.customSlots.put(8, this.addSlot(new SlotItemHandler(internal, 8, 61, 53) {
@@ -156,7 +156,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(8, 0, 0);
+				slotChanged(8, 0, 0);
 			}
 		}));
 		this.customSlots.put(9, this.addSlot(new SlotItemHandler(internal, 9, 124, 35) {
@@ -165,7 +165,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingtableCTGUIMenu.this.slotChanged(9, 0, 0);
+				slotChanged(9, 0, 0);
 			}
 		}));
 		for (int si = 0; si < 3; ++si)
@@ -196,36 +196,31 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			if (index < 10) {
-				if (!this.mergeItemStack(itemstack1, 10, this.inventorySlots.size(), true)) {
+				if (!this.mergeItemStack(itemstack1, 10, this.inventorySlots.size(), true))
 					return ItemStack.EMPTY;
-				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (!this.mergeItemStack(itemstack1, 0, 10, false)) {
 				if (index < 10 + 27) {
-					if (!this.mergeItemStack(itemstack1, 10 + 27, this.inventorySlots.size(), true)) {
+					if (!this.mergeItemStack(itemstack1, 10 + 27, this.inventorySlots.size(), true))
 						return ItemStack.EMPTY;
-					}
 				} else {
-					if (!this.mergeItemStack(itemstack1, 10, 10 + 27, false)) {
+					if (!this.mergeItemStack(itemstack1, 10, 10 + 27, false))
 						return ItemStack.EMPTY;
-					}
 				}
 				return ItemStack.EMPTY;
 			}
-			if (itemstack1.getCount() == 0) {
+			if (itemstack1.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
-			} else {
+			else
 				slot.onSlotChanged();
-			}
-			if (itemstack1.getCount() == itemstack.getCount()) {
+			if (itemstack1.getCount() == itemstack.getCount())
 				return ItemStack.EMPTY;
-			}
 			slot.onTake(playerIn, itemstack1);
 		}
 		return itemstack;
 	}
 
-	@Override /** 
+	@Override /**
 				* Merges provided ItemStack with the first avaliable one in the container/player inventor between minIndex (included) and maxIndex (excluded). Args : stack, minIndex, maxIndex, negativDirection. /!\ the Container implementation do not check if the item is valid for the slot
 				*/
 	protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
@@ -307,7 +302,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 	public void onContainerClosed(PlayerEntity playerIn) {
 		super.onContainerClosed(playerIn);
 		if (!bound && playerIn instanceof ServerPlayerEntity) {
-			if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity) playerIn).hasDisconnected()) {
+			if (!((ServerPlayerEntity) playerIn).isAlive() || ((ServerPlayerEntity) playerIn).hasDisconnected()) {
 				for (int j = 0; j < internal.getSlots(); ++j) {
 					playerIn.dropItem(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
 				}
@@ -320,7 +315,7 @@ public class CraftingtableCTGUIMenu extends Container implements Supplier<Map<In
 	}
 
 	private void slotChanged(int slotid, int ctype, int meta) {
-		if (this.world != null && this.world.isRemote) {
+		if (this.world != null && this.world.isRemote()) {
 			JustCtguiMod.PACKET_HANDLER.sendToServer(new CraftingtableCTGUISlotMessage(slotid, x, y, z, ctype, meta));
 			CraftingtableCTGUISlotMessage.handleSlotAction(entity, slotid, ctype, meta, x, y, z);
 		}

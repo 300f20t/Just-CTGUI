@@ -7,14 +7,12 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.thread.SidedThreadGroups;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.client.model.obj.OBJLoader;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.network.PacketBuffer;
@@ -38,15 +36,14 @@ public class JustCtguiMod {
 	public JustCtguiMod() {
 		// Start of user code block mod constructor
 		// End of user code block mod constructor
-		MinecraftForge.EVENT_BUS.register(this);
+		MinecraftForge.EVENT_BUS.register(new JustCtguiModFMLBusEvents(this));
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		JustCtguiModMenus.REGISTRY.register(bus);
 
+		bus.register(this);
 		// Start of user code block mod init
 		// End of user code block mod init
-		bus.addListener(this::clientSetup);
-		bus.register(this);
 	}
 
 	// Start of user code block mod methods
@@ -67,21 +64,25 @@ public class JustCtguiMod {
 			workQueue.add(new AbstractMap.SimpleEntry<>(action, tick));
 	}
 
-	@SubscribeEvent
-	public void tick(TickEvent.ServerTickEvent event) {
-		if (event.phase == TickEvent.Phase.END) {
-			List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
-			workQueue.forEach(work -> {
-				work.setValue(work.getValue() - 1);
-				if (work.getValue() == 0)
-					actions.add(work);
-			});
-			actions.forEach(e -> e.getKey().run());
-			workQueue.removeAll(actions);
-		}
-	}
+	private static class JustCtguiModFMLBusEvents {
+		private final JustCtguiMod parent;
 
-	private void clientSetup(FMLClientSetupEvent event) {
-		OBJLoader.INSTANCE.addDomain(MODID);
+		JustCtguiModFMLBusEvents(JustCtguiMod parent) {
+			this.parent = parent;
+		}
+
+		@SubscribeEvent
+		public void tick(TickEvent.ServerTickEvent event) {
+			if (event.phase == TickEvent.Phase.END) {
+				List<AbstractMap.SimpleEntry<Runnable, Integer>> actions = new ArrayList<>();
+				workQueue.forEach(work -> {
+					work.setValue(work.getValue() - 1);
+					if (work.getValue() == 0)
+						actions.add(work);
+				});
+				actions.forEach(e -> e.getKey().run());
+				workQueue.removeAll(actions);
+			}
+		}
 	}
 }

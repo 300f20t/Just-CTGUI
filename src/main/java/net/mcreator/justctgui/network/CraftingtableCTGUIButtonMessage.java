@@ -13,7 +13,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.mcreator.justctgui.world.inventory.CraftingtableCTGUIMenu;
 import net.mcreator.justctgui.procedures.VerticalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.ScriptswriterProcedure;
-import net.mcreator.justctgui.procedures.ReloadCommandProcedure;
 import net.mcreator.justctgui.procedures.NonemirroraxisProcedure;
 import net.mcreator.justctgui.procedures.HorizontalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.GenerateracipesProcedure;
@@ -91,19 +90,15 @@ public class CraftingtableCTGUIButtonMessage {
 		}
 		if (buttonID == 5) {
 
-			GenerateracipesProcedure.execute(world, guistate);
+			GenerateracipesProcedure.execute(entity, guistate);
 		}
 		if (buttonID == 6) {
-		
-        	ScriptswriterProcedure.execute(entity, guistate);
+
+			ScriptswriterProcedure.execute(entity, guistate);
 		}
 		if (buttonID == 7) {
 
 			GUIcloseProcedure.execute(entity);
-		}
-		if (buttonID == 8) {
-
-			ReloadCommandProcedure.execute(world, x, y, z);
 		}
 	}
 

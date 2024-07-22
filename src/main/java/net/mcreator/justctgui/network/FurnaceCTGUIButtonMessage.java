@@ -66,7 +66,7 @@ public class FurnaceCTGUIButtonMessage {
 			return;
 		if (buttonID == 0) {
 
-			GenerateFurnaceReciepsProcedure.execute(world, guistate);
+			GenerateFurnaceReciepsProcedure.execute(entity, guistate);
 		}
 		if (buttonID == 1) {
 

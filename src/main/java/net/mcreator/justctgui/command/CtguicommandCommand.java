@@ -1,8 +1,8 @@
 package net.mcreator.justctgui.command;
 
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.common.util.FakePlayerFactory;
 
 import net.minecraft.world.server.ServerWorld;
@@ -19,9 +19,9 @@ import net.mcreator.justctgui.procedures.OpenFurnaceCTGUIProcedure;
 @Mod.EventBusSubscriber
 public class CtguicommandCommand {
 	@SubscribeEvent
-	public static void registerCommand(FMLServerStartingEvent event) {
-		event.getCommandDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermissionLevel(4)).then(Commands.literal("crafting_table").then(Commands.literal("create").executes(arguments -> {
-			World world = arguments.getSource().getWorld().getWorld();
+	public static void registerCommand(RegisterCommandsEvent event) {
+		event.getDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermissionLevel(4)).then(Commands.literal("crafting_table").then(Commands.literal("create").executes(arguments -> {
+			World world = arguments.getSource().getWorld();
 			double x = arguments.getSource().getPos().getX();
 			double y = arguments.getSource().getPos().getY();
 			double z = arguments.getSource().getPos().getZ();
@@ -35,7 +35,7 @@ public class CtguicommandCommand {
 			OpencraftingtableCTGUIProcedure.execute(world, x, y, z, entity);
 			return 0;
 		})).then(Commands.literal("remove").executes(arguments -> {
-			World world = arguments.getSource().getWorld().getWorld();
+			World world = arguments.getSource().getWorld();
 			double x = arguments.getSource().getPos().getX();
 			double y = arguments.getSource().getPos().getY();
 			double z = arguments.getSource().getPos().getZ();
@@ -49,7 +49,7 @@ public class CtguicommandCommand {
 			OpenRemovingRecipesCraftingTableCTGUIProcedure.execute(world, x, y, z, entity);
 			return 0;
 		}))).then(Commands.literal("furnace").then(Commands.literal("create").executes(arguments -> {
-			World world = arguments.getSource().getWorld().getWorld();
+			World world = arguments.getSource().getWorld();
 			double x = arguments.getSource().getPos().getX();
 			double y = arguments.getSource().getPos().getY();
 			double z = arguments.getSource().getPos().getZ();
@@ -63,7 +63,7 @@ public class CtguicommandCommand {
 			OpenFurnaceCTGUIProcedure.execute(world, x, y, z, entity);
 			return 0;
 		})).then(Commands.literal("remove").executes(arguments -> {
-			World world = arguments.getSource().getWorld().getWorld();
+			World world = arguments.getSource().getWorld();
 			double x = arguments.getSource().getPos().getX();
 			double y = arguments.getSource().getPos().getY();
 			double z = arguments.getSource().getPos().getZ();

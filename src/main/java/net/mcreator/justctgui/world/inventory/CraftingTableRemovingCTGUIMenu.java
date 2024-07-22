@@ -84,7 +84,7 @@ public class CraftingTableRemovingCTGUIMenu extends Container implements Supplie
 			@Override
 			public void onSlotChanged() {
 				super.onSlotChanged();
-				CraftingTableRemovingCTGUIMenu.this.slotChanged(0, 0, 0);
+				slotChanged(0, 0, 0);
 			}
 		}));
 		for (int si = 0; si < 3; ++si)
@@ -115,36 +115,31 @@ public class CraftingTableRemovingCTGUIMenu extends Container implements Supplie
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 			if (index < 1) {
-				if (!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true)) {
+				if (!this.mergeItemStack(itemstack1, 1, this.inventorySlots.size(), true))
 					return ItemStack.EMPTY;
-				}
 				slot.onSlotChange(itemstack1, itemstack);
 			} else if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 				if (index < 1 + 27) {
-					if (!this.mergeItemStack(itemstack1, 1 + 27, this.inventorySlots.size(), true)) {
+					if (!this.mergeItemStack(itemstack1, 1 + 27, this.inventorySlots.size(), true))
 						return ItemStack.EMPTY;
-					}
 				} else {
-					if (!this.mergeItemStack(itemstack1, 1, 1 + 27, false)) {
+					if (!this.mergeItemStack(itemstack1, 1, 1 + 27, false))
 						return ItemStack.EMPTY;
-					}
 				}
 				return ItemStack.EMPTY;
 			}
-			if (itemstack1.getCount() == 0) {
+			if (itemstack1.getCount() == 0)
 				slot.putStack(ItemStack.EMPTY);
-			} else {
+			else
 				slot.onSlotChanged();
-			}
-			if (itemstack1.getCount() == itemstack.getCount()) {
+			if (itemstack1.getCount() == itemstack.getCount())
 				return ItemStack.EMPTY;
-			}
 			slot.onTake(playerIn, itemstack1);
 		}
 		return itemstack;
 	}
 
-	@Override /** 
+	@Override /**
 				* Merges provided ItemStack with the first avaliable one in the container/player inventor between minIndex (included) and maxIndex (excluded). Args : stack, minIndex, maxIndex, negativDirection. /!\ the Container implementation do not check if the item is valid for the slot
 				*/
 	protected boolean mergeItemStack(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
@@ -226,7 +221,7 @@ public class CraftingTableRemovingCTGUIMenu extends Container implements Supplie
 	public void onContainerClosed(PlayerEntity playerIn) {
 		super.onContainerClosed(playerIn);
 		if (!bound && playerIn instanceof ServerPlayerEntity) {
-			if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity) playerIn).hasDisconnected()) {
+			if (!((ServerPlayerEntity) playerIn).isAlive() || ((ServerPlayerEntity) playerIn).hasDisconnected()) {
 				for (int j = 0; j < internal.getSlots(); ++j) {
 					playerIn.dropItem(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
 				}
@@ -239,7 +234,7 @@ public class CraftingTableRemovingCTGUIMenu extends Container implements Supplie
 	}
 
 	private void slotChanged(int slotid, int ctype, int meta) {
-		if (this.world != null && this.world.isRemote) {
+		if (this.world != null && this.world.isRemote()) {
 			JustCtguiMod.PACKET_HANDLER.sendToServer(new CraftingTableRemovingCTGUISlotMessage(slotid, x, y, z, ctype, meta));
 			CraftingTableRemovingCTGUISlotMessage.handleSlotAction(entity, slotid, ctype, meta, x, y, z);
 		}

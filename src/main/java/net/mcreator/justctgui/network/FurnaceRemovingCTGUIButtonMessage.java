@@ -66,7 +66,7 @@ public class FurnaceRemovingCTGUIButtonMessage {
 			return;
 		if (buttonID == 0) {
 
-			GenerateRemovingFurnaceRecipesProcedure.execute();
+			GenerateRemovingFurnaceRecipesProcedure.execute(entity);
 		}
 		if (buttonID == 1) {
 

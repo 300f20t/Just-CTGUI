@@ -66,7 +66,7 @@ public class CraftingTableRemovingCTGUIButtonMessage {
 			return;
 		if (buttonID == 0) {
 
-			GenerateRemovingRecipesProcedure.execute(world);
+			GenerateRemovingRecipesProcedure.execute(entity);
 		}
 		if (buttonID == 1) {
 

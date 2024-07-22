@@ -499,9 +499,6 @@
           "name": "button_reload",
           "text": "Reload",
           "isUndecorated": false,
-          "onClick": {
-            "name": "ReloadCommand"
-          },
           "width": 56,
           "height": 20,
           "x": 312,
