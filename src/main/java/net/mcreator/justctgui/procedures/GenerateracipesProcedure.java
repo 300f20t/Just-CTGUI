@@ -32,7 +32,7 @@ public class GenerateracipesProcedure {
 				+ ((guistate.containsKey("text:recipe_name") ? ((TextFieldWidget) guistate.get("text:recipe_name")).getText() : "").isEmpty()
 						? "no_name"
 						: (guistate.containsKey("text:recipe_name") ? ((TextFieldWidget) guistate.get("text:recipe_name")).getText() : ""))
-				+ "\", " + ((guistate.containsKey("checkbox:Is_mirrored") ? ((CheckboxButton) guistate.get("checkbox:Is_mirrored")).isChecked() : false) ? JustCtguiModVariables.Mirror_axis + ", " : "") + JustCtguiModVariables.Pre_generated_recipe;
+				+ "\", " + JustCtguiModVariables.Pre_generated_recipe;
 		if (entity instanceof PlayerEntity && !((PlayerEntity) entity).world.isRemote())
 			((PlayerEntity) entity).sendStatusMessage(new StringTextComponent(JustCtguiModVariables.Generated_recipe), false);
 	}

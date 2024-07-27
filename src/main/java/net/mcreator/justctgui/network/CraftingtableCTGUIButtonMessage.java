@@ -11,14 +11,9 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraft.entity.player.PlayerEntity;
 
 import net.mcreator.justctgui.world.inventory.CraftingtableCTGUIMenu;
-import net.mcreator.justctgui.procedures.VerticalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.ScriptswriterProcedure;
-import net.mcreator.justctgui.procedures.NonemirroraxisProcedure;
-import net.mcreator.justctgui.procedures.HorizontalmirroraxisProcedure;
 import net.mcreator.justctgui.procedures.GenerateracipesProcedure;
 import net.mcreator.justctgui.procedures.GUIcloseProcedure;
-import net.mcreator.justctgui.procedures.DiagonalmirroraxisProcedure;
-import net.mcreator.justctgui.procedures.AllmirroraxisProcedure;
 import net.mcreator.justctgui.JustCtguiMod;
 
 import java.util.function.Supplier;
@@ -70,33 +65,13 @@ public class CraftingtableCTGUIButtonMessage {
 			return;
 		if (buttonID == 0) {
 
-			AllmirroraxisProcedure.execute();
+			GenerateracipesProcedure.execute(entity, guistate);
 		}
 		if (buttonID == 1) {
 
-			DiagonalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 2) {
-
-			HorizontalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 3) {
-
-			NonemirroraxisProcedure.execute();
-		}
-		if (buttonID == 4) {
-
-			VerticalmirroraxisProcedure.execute();
-		}
-		if (buttonID == 5) {
-
-			GenerateracipesProcedure.execute(entity, guistate);
-		}
-		if (buttonID == 6) {
-
 			ScriptswriterProcedure.execute(entity, guistate);
 		}
-		if (buttonID == 7) {
+		if (buttonID == 2) {
 
 			GUIcloseProcedure.execute(entity);
 		}

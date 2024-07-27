@@ -11,81 +11,6 @@
     "doesPauseGame": false,
     "components": [
       {
-        "type": "button",
-        "data": {
-          "name": "button_all",
-          "text": "all",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "Allmirroraxis"
-          },
-          "width": 40,
-          "height": 20,
-          "x": 2,
-          "y": 12
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_diagonal",
-          "text": "diagonal",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "Diagonalmirroraxis"
-          },
-          "width": 67,
-          "height": 20,
-          "x": 165,
-          "y": 12
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_horizontal",
-          "text": "horizontal",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "Horizontalmirroraxis"
-          },
-          "width": 77,
-          "height": 20,
-          "x": 88,
-          "y": 12
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_none",
-          "text": "none",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "Nonemirroraxis"
-          },
-          "width": 46,
-          "height": 20,
-          "x": 42,
-          "y": 12
-        }
-      },
-      {
-        "type": "button",
-        "data": {
-          "name": "button_vertical",
-          "text": "vertical",
-          "isUndecorated": false,
-          "onClick": {
-            "name": "Verticalmirroraxis"
-          },
-          "width": 67,
-          "height": 20,
-          "x": 232,
-          "y": 12
-        }
-      },
-      {
         "type": "textfield",
         "data": {
           "placeholder": "name",
@@ -445,52 +370,6 @@
           "text": "Is mirrored?",
           "x": 6,
           "y": 107
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_empty",
-          "text": {
-            "fixedValue": "Mirror axis:"
-          },
-          "color": {
-            "value": -3355393,
-            "falpha": 0.0
-          },
-          "x": 2,
-          "y": 2
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_current_axis",
-          "text": {
-            "fixedValue": "Current axis:"
-          },
-          "color": {
-            "value": -3355393,
-            "falpha": 0.0
-          },
-          "x": 126,
-          "y": 2
-        }
-      },
-      {
-        "type": "label",
-        "data": {
-          "name": "label_axis",
-          "text": {
-            "fixedValue": "axis",
-            "name": "GetCurrentAxis"
-          },
-          "color": {
-            "value": -3355393,
-            "falpha": 0.0
-          },
-          "x": 194,
-          "y": 2
         }
       },
       {
