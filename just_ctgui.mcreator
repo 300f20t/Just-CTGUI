@@ -386,176 +386,6 @@
       }
     },
     {
-      "name": "ATTENTION",
-      "type": "procedure",
-      "sortid": 16,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "attention",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/ATTENTIONProcedure.java"
-        ],
-        "dependencies": []
-      }
-    },
-    {
-      "name": "Allmirroraxis",
-      "type": "procedure",
-      "sortid": 17,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "allmirroraxis",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/AllmirroraxisProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Verticalmirroraxis",
-      "type": "procedure",
-      "sortid": 18,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "verticalmirroraxis",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/VerticalmirroraxisProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Nonemirroraxis",
-      "type": "procedure",
-      "sortid": 19,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "nonemirroraxis",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/NonemirroraxisProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Horizontalmirroraxis",
-      "type": "procedure",
-      "sortid": 20,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "horizontalmirroraxis",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/HorizontalmirroraxisProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Diagonalmirroraxis",
-      "type": "procedure",
-      "sortid": 21,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "diagonalmirroraxis",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/DiagonalmirroraxisProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Allispressed",
-      "type": "procedure",
-      "sortid": 22,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "allispressed",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/AllispressedProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Verticalispressed",
-      "type": "procedure",
-      "sortid": 23,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "verticalispressed",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/VerticalispressedProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Noneispressed",
-      "type": "procedure",
-      "sortid": 24,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "noneispressed",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/NoneispressedProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Horizontalispressed",
-      "type": "procedure",
-      "sortid": 25,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "horizontalispressed",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/HorizontalispressedProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
-      "name": "Diagonalispressed",
-      "type": "procedure",
-      "sortid": 26,
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "diagonalispressed",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/DiagonalispressedProcedure.java"
-        ],
-        "dependencies": []
-      },
-      "path": "~/Mirror axes"
-    },
-    {
       "name": "FurnaceCTGUI",
       "type": "gui",
       "compiles": true,
@@ -661,20 +491,6 @@
         "dependencies": []
       },
       "path": "~/Generators"
-    },
-    {
-      "name": "GetCurrentAxis",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "get_current_axis",
-      "metadata": {
-        "return_type": "string",
-        "files": [
-          "src/main/java/net/mcreator/justctgui/procedures/GetCurrentAxisProcedure.java"
-        ],
-        "dependencies": []
-      }
     },
     {
       "name": "OpenRemovingRecipesCraftingTableCTGUI",
@@ -911,8 +727,8 @@
   "tag_elements": {},
   "language_map": {
     "ru_ru": {
-      "gui.just_ctgui.crafting_table_removing_recipes_gui.button_horizontal": "гаризонтальная",
       "gui.just_ctgui.craftingtable_ctgui.tooltip_attention_this_configuration_wil": "ПРЕДУПРЕЖДЕНИЕ ЭТА КОНФИГУРАЦИЯ НЕ БУДЕТ РАБОТАТЬ!!!",
+      "gui.just_ctgui.crafting_table_removing_recipes_gui.button_horizontal": "гаризонтальная",
       "gui.just_ctgui.furnace_removing_ctgui.label_file_name": "Название файла:",
       "gui.just_ctgui.furnace_removing_ctgui.label_time": "Время(секунды):",
       "gui.just_ctgui.furnace_removing_recipes_gui.label_file_name": "Название файла:",
@@ -1006,8 +822,8 @@
       "gui.just_ctgui.crafting_table_removing_recipes_gui.recipe_name": "название"
     },
     "en_us": {
-      "gui.just_ctgui.craftingtable_ctgui.tooltip_attention_this_configuration_wil": "ATTENTION THIS CONFIGURATION WILL NOT WORK!!!",
       "gui.just_ctgui.crafting_table_removing_recipes_gui.button_horizontal": "horizontal",
+      "gui.just_ctgui.craftingtable_ctgui.tooltip_attention_this_configuration_wil": "ATTENTION THIS CONFIGURATION WILL NOT WORK!!!",
       "gui.just_ctgui.furnace_removing_ctgui.label_file_name": "File name:",
       "gui.just_ctgui.furnace_removing_ctgui.label_time": "Time(seconds):",
       "gui.just_ctgui.furnace_removing_recipes_gui.label_file_name": "File name:",
@@ -1104,10 +920,6 @@
   "foldersRoot": {
     "name": "~",
     "children": [
-      {
-        "name": "Mirror axes",
-        "children": []
-      },
       {
         "name": "Getting items in Slots",
         "children": []
