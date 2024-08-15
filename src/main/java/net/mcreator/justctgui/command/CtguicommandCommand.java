@@ -23,11 +23,7 @@ import net.mcreator.justctgui.procedures.OpenFurnaceCTGUIProcedure;
 public class CtguicommandCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-<<<<<<< HEAD
 		event.getDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermission(4)).then(Commands.literal("crafting_table").then(Commands.literal("create").executes(arguments -> {
-=======
-		event.getDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermission(4)).then(Commands.literal("craftingTable").then(Commands.literal("addRecipe").executes(arguments -> {
->>>>>>> b00de19 (Update CtguicommandCommand.java)
 			Level world = arguments.getSource().getUnsidedLevel();
 			double x = arguments.getSource().getPosition().x();
 			double y = arguments.getSource().getPosition().y();
