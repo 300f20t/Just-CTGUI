@@ -20,7 +20,7 @@ import net.mcreator.justctgui.procedures.OpenFurnaceCTGUIProcedure;
 public class CtguicommandCommand {
 	@SubscribeEvent
 	public static void registerCommand(FMLServerStartingEvent event) {
-		event.getCommandDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermissionLevel(4)).then(Commands.literal("crafting_table").then(Commands.literal("create").executes(arguments -> {
+		event.getCommandDispatcher().register(Commands.literal("ctgui").requires(s -> s.hasPermissionLevel(4)).then(Commands.literal("craftingTable").then(Commands.literal("addRecipe").executes(arguments -> {
 			World world = arguments.getSource().getWorld().getWorld();
 			double x = arguments.getSource().getPos().getX();
 			double y = arguments.getSource().getPos().getY();
