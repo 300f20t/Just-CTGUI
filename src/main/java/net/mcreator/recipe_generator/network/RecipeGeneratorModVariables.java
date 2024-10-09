@@ -1,17 +1,11 @@
 package net.mcreator.recipe_generator.network;
 
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.attachment.AttachmentType;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.bus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import net.mcreator.recipe_generator.RecipeGeneratorMod;
-
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RecipeGeneratorModVariables {
-	public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, RecipeGeneratorMod.MODID);
 	public static String item_in_slot_0_crafting_table = "";
 	public static String item_in_slot_1_crafting_table = "\"\"";
 	public static String item_in_slot_2_crafting_table = "\"\"";

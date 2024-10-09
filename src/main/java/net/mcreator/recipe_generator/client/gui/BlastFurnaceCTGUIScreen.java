@@ -1,7 +1,5 @@
 package net.mcreator.recipe_generator.client.gui;
 
-import net.neoforged.neoforge.network.PacketDistributor;
-
 import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,6 +13,7 @@ import net.minecraft.client.Minecraft;
 
 import net.mcreator.recipe_generator.world.inventory.BlastFurnaceCTGUIMenu;
 import net.mcreator.recipe_generator.network.BlastFurnaceCTGUIButtonMessage;
+import net.mcreator.recipe_generator.RecipeGeneratorMod;
 
 import java.util.HashMap;
 
@@ -49,7 +48,7 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(guiGraphics, mouseX, mouseY, partialTicks);
+		this.renderBackground(guiGraphics);
 		super.render(guiGraphics, mouseX, mouseY, partialTicks);
 		recipe_name.render(guiGraphics, mouseX, mouseY, partialTicks);
 		file_name.render(guiGraphics, mouseX, mouseY, partialTicks);
@@ -88,6 +87,15 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 	}
 
 	@Override
+	public void containerTick() {
+		super.containerTick();
+		recipe_name.tick();
+		file_name.tick();
+		XP.tick();
+		time.tick();
+	}
+
+	@Override
 	public void resize(Minecraft minecraft, int width, int height) {
 		String recipe_nameValue = recipe_name.getValue();
 		String file_nameValue = file_name.getValue();
@@ -123,16 +131,16 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 			}
 
 			@Override
-			public void moveCursorTo(int pos, boolean flag) {
-				super.moveCursorTo(pos, flag);
+			public void moveCursorTo(int pos) {
+				super.moveCursorTo(pos);
 				if (getValue().isEmpty())
 					setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.recipe_name").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		recipe_name.setMaxLength(32767);
 		recipe_name.setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.recipe_name").getString());
+		recipe_name.setMaxLength(32767);
 		guistate.put("text:recipe_name", recipe_name);
 		this.addWidget(this.recipe_name);
 		file_name = new EditBox(this.font, this.leftPos + -128, this.topPos + 44, 118, 18, Component.translatable("gui.recipe_generator.blast_furnace_ctgui.file_name")) {
@@ -146,16 +154,16 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 			}
 
 			@Override
-			public void moveCursorTo(int pos, boolean flag) {
-				super.moveCursorTo(pos, flag);
+			public void moveCursorTo(int pos) {
+				super.moveCursorTo(pos);
 				if (getValue().isEmpty())
 					setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.file_name").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		file_name.setMaxLength(32767);
 		file_name.setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.file_name").getString());
+		file_name.setMaxLength(32767);
 		guistate.put("text:file_name", file_name);
 		this.addWidget(this.file_name);
 		XP = new EditBox(this.font, this.leftPos + -128, this.topPos + 98, 118, 18, Component.translatable("gui.recipe_generator.blast_furnace_ctgui.XP")) {
@@ -169,16 +177,16 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 			}
 
 			@Override
-			public void moveCursorTo(int pos, boolean flag) {
-				super.moveCursorTo(pos, flag);
+			public void moveCursorTo(int pos) {
+				super.moveCursorTo(pos);
 				if (getValue().isEmpty())
 					setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.XP").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		XP.setMaxLength(32767);
 		XP.setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.XP").getString());
+		XP.setMaxLength(32767);
 		guistate.put("text:XP", XP);
 		this.addWidget(this.XP);
 		time = new EditBox(this.font, this.leftPos + -128, this.topPos + 143, 118, 18, Component.translatable("gui.recipe_generator.blast_furnace_ctgui.time")) {
@@ -192,21 +200,21 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 			}
 
 			@Override
-			public void moveCursorTo(int pos, boolean flag) {
-				super.moveCursorTo(pos, flag);
+			public void moveCursorTo(int pos) {
+				super.moveCursorTo(pos);
 				if (getValue().isEmpty())
 					setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.time").getString());
 				else
 					setSuggestion(null);
 			}
 		};
-		time.setMaxLength(32767);
 		time.setSuggestion(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.time").getString());
+		time.setMaxLength(32767);
 		guistate.put("text:time", time);
 		this.addWidget(this.time);
 		button_generate = Button.builder(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.button_generate"), e -> {
 			if (true) {
-				PacketDistributor.sendToServer(new BlastFurnaceCTGUIButtonMessage(0, x, y, z));
+				RecipeGeneratorMod.PACKET_HANDLER.sendToServer(new BlastFurnaceCTGUIButtonMessage(0, x, y, z));
 				BlastFurnaceCTGUIButtonMessage.handleButtonAction(entity, 0, x, y, z);
 			}
 		}).bounds(this.leftPos + 186, this.topPos + 7, 67, 20).build();
@@ -214,7 +222,7 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 		this.addRenderableWidget(button_generate);
 		button_save = Button.builder(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.button_save"), e -> {
 			if (true) {
-				PacketDistributor.sendToServer(new BlastFurnaceCTGUIButtonMessage(1, x, y, z));
+				RecipeGeneratorMod.PACKET_HANDLER.sendToServer(new BlastFurnaceCTGUIButtonMessage(1, x, y, z));
 				BlastFurnaceCTGUIButtonMessage.handleButtonAction(entity, 1, x, y, z);
 			}
 		}).bounds(this.leftPos + 186, this.topPos + 34, 46, 20).build();
@@ -222,7 +230,7 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 		this.addRenderableWidget(button_save);
 		button_close = Button.builder(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.button_close"), e -> {
 			if (true) {
-				PacketDistributor.sendToServer(new BlastFurnaceCTGUIButtonMessage(2, x, y, z));
+				RecipeGeneratorMod.PACKET_HANDLER.sendToServer(new BlastFurnaceCTGUIButtonMessage(2, x, y, z));
 				BlastFurnaceCTGUIButtonMessage.handleButtonAction(entity, 2, x, y, z);
 			}
 		}).bounds(this.leftPos + 186, this.topPos + 142, 51, 20).build();
@@ -230,7 +238,7 @@ public class BlastFurnaceCTGUIScreen extends AbstractContainerScreen<BlastFurnac
 		this.addRenderableWidget(button_close);
 		button_reload = Button.builder(Component.translatable("gui.recipe_generator.blast_furnace_ctgui.button_reload"), e -> {
 			if (true) {
-				PacketDistributor.sendToServer(new BlastFurnaceCTGUIButtonMessage(3, x, y, z));
+				RecipeGeneratorMod.PACKET_HANDLER.sendToServer(new BlastFurnaceCTGUIButtonMessage(3, x, y, z));
 				BlastFurnaceCTGUIButtonMessage.handleButtonAction(entity, 3, x, y, z);
 			}
 		}).bounds(this.leftPos + 186, this.topPos + 61, 56, 20).build();
